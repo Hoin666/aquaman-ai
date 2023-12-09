@@ -70,7 +70,7 @@ def convert_images_to_base64(folder_path):
             encoded_image = base64.b64encode(image_bytesio.getvalue()).decode('utf-8')
             
             # '개체1', '개체2', ..., '개체N' 형식의 키로 데이터에 추가
-            key = f'개체{idx}'
+            key = f'fish{idx}'
             image_data[key] = encoded_image
 
     return image_data
@@ -107,4 +107,3 @@ def predict(folder_name : str):
         return f"예측 중 오류 발생: {str(e)}"
     
     
-
