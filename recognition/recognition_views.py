@@ -1,21 +1,37 @@
 import os
-from ultralytics import YOLO
 import base64
+from ultralytics import YOLO
 from io import BytesIO
+import argparse
+
+# parser 등록
+parser = argparse.ArgumentParser(description='Argparse Tutorial')
+parser.add_argument('--test', default='sample1.jpg',help='test image data')
+opt = parser.parse_args()
+
+print(opt.test)
 
 
 # 모델의 weight path
-model_path = os.path.join("recognition\\models\\", "recognition.pt")
+# 모델 테스팅 경로
+# model_path = os.path.join("recognition\\models\\", "recognition.pt")
+
+# test_views api 테스팅 경로
+model_path = os.path.join("models\\", "recognition.pt")
+
 recog =  YOLO(model_path)
 
 # 이미지가 save 될 path
-save_path = "recognition\\"
+save_path = os.getcwd()
 
+print(save_path)
 # 이미지를 불러올 path
-base_path = 'static\\img\\'
+base_path = '..\\static\\img\\'
 
 def convert_images_to_base64(folder_path):
     image_data = {}
+    print("여기까지")
+    print(folder_path)
     
     # 폴더 내 모든 파일 목록 가져오기
     files = [f for f in os.listdir(folder_path) if f.lower().endswith('.jpg')]
@@ -54,3 +70,15 @@ def predict(image_name : str):
     
     return image_data
 
+def main():
+    
+    # test_views에서 테스트
+    file = str(opt.test)
+    predict(file)
+    
+    # 모델 테스트
+    # predict("sample1.jpg")
+
+if __name__ == "__main__":
+
+    main()

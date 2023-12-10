@@ -4,8 +4,15 @@ from PIL import Image
 import base64
 from io import BytesIO
 import shutil
+import argparse
 
+# parser 등록
+parser = argparse.ArgumentParser(description='Argparse Tutorial')
+parser.add_argument('--test', default='sample1.jpg',help='test image data')
+parser.add_argument('--option',default='test',help='test or register')
+opt = parser.parse_args()
 
+print(opt.test)
 
 model_path = os.path.join("disease\\models\\", "disease.pt")
 disease =  YOLO(model_path)
@@ -107,3 +114,4 @@ def predict(folder_name : str):
         return f"예측 중 오류 발생: {str(e)}"
     
     
+
